@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">Connected</string>
-    <string name="button" />
-    <string name="nav_support">Support</string>
-    <string name="nav_feed">Feed</string>
-    <string name="nav_profile">Profile</string>
-</resources>
