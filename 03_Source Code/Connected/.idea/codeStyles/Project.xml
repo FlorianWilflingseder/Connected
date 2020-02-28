@@ -1,6 +1,7 @@
 <component name="ProjectCodeStyleConfiguration">
   <code_scheme name="Project" version="173">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <DBN-PSQL>
       <case-options enabled="true">
         <option name="KEYWORD_CASE" value="lower" />
@@ -49,6 +50,8 @@
         <option name="ITERATION_ELEMENTS_WRAPPING" value="chop_down_if_not_single" />
       </formatting-settings>
     </DBN-SQL>
+=======
+>>>>>>> 98a9728fcc062d27d40064f54b9c878bce4ba1db
 =======
 >>>>>>> 98a9728fcc062d27d40064f54b9c878bce4ba1db
     <codeStyleSettings language="XML">
