@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
 
     <ImageView
         android:src="@drawable/appiconsupport"
@@ -20,5 +21,53 @@
         android:layout_marginTop="32dp"
         android:text="Connected\nConnected@gmail.com\nHuman-Resources:\nFlorian Wilflingseder"></TextView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="146dp"
+        android:layout_marginStart="25dp"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:text="Feedback"
+        ></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:text="Bei Verbesserungsvorschlägen oder entdeckte Bugs schreiben Sie in das anschließenden Formular Ihre Ideen und Verbersserungsvorschläge."
+        android:layout_marginTop="177dp"
+        android:layout_marginStart="25dp"
+        ></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="25dp"
+        android:text="© All rights reserved"></TextView>
+    
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="245dp"
+        android:padding="16dp"
+        android:text="flowilflingseder@gmail.com"
+
+        ></EditText>
+
+    <EditText
+        android:id="@+id/feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:padding="16dp"
+        android:text="flowilflingseder@gmail.com"
+
+        ></EditText>
 
 </RelativeLayout>
