@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+
+    <ImageView
+        android:src="@drawable/appiconsupport"
+        android:layout_width="130dp"
+        android:layout_height="125dp"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"></ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="32dp"
+        android:text="Connected\nsuppConnected@gmail.com\nHuman-Resources:\nFlorian Wilflingseder"></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="146dp"
+        android:layout_marginStart="25dp"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:text="Feedback"
+        ></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:text="Bei Verbesserungsvorschlägen oder entdeckte Bugs schreiben Sie in das anschließenden Formular Ihre Ideen und Verbersserungsvorschläge."
+        android:layout_marginTop="177dp"
+        android:layout_marginStart="25dp"
+        ></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="25dp"
+        android:text="© All rights reserved"></TextView>
+    
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="255dp"
+        android:padding="16dp"
+        android:hint="suppConnected@gmail.com"
+        android:lines="1"
+        android:gravity="start|top"
+        android:enabled="false"
+        ></EditText>
+
+    <EditText
+        android:background="@drawable/roundedfeedback"
+        android:id="@+id/feedback"
+        android:layout_width="353dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:layout_centerHorizontal="true"
+        android:padding="16dp"
+        android:lines="5"
+        android:gravity="start|top"
+        ></EditText>
+
+    <Button
+        android:background="@drawable/roundedbutton"
+        android:id="@+id/send_btn"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="460dp"
+        android:text="Senden"
+        android:layout_centerHorizontal="true"
+        ></Button>
+</RelativeLayout>
