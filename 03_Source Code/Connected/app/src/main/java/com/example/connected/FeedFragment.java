@@ -21,7 +21,7 @@ public class FeedFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //new UpdateStatusTask().execute("ich fik euch alle lg android studio");
         try {
-            List<String> list =  new RetrieveTweetsTask().execute("tonimufasa").get();
+            List<String> list =  new RetrieveTweetsTask().execute("uzy97").get();
             for(String s: list){
                 System.out.println(s);
             }
