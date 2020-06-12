@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FeedFragment()).commit();
         new TwitterManager();
-
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
