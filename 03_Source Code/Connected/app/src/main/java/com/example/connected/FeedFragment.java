@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,9 +21,13 @@ public class FeedFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.fragment_feed, container, false);
+
+
         //new UpdateStatusTask().execute("ich fik euch alle lg android studio");
-        try {
-            List<String> list =  new RetrieveTweetsTask().execute("tonimufasa").get();
+        /*try {
+            List<String> list =  new RetrieveTweetsTask().execute("Cykl0pS_HD").get();
             for(String s: list){
                 System.out.println(s);
             }
@@ -29,7 +35,7 @@ public class FeedFragment extends Fragment {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        return inflater.inflate(R.layout.fragment_feed, container, false);
+        }*/
+        return rootView;
     }
 }
