@@ -7,15 +7,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-
+import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,10 +30,9 @@ public class ProfileFragment extends Fragment {
 
     private ArrayList<Profile> list;
     Spinner s;
-    Button buttonSave;
+    Button buttonSave, buttonDel;
     EditText line1, line2;
-    String[] arrList;
-
+    ArrayList arrList;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Nullable
     @Override
@@ -43,16 +45,50 @@ public class ProfileFragment extends Fragment {
 
         buttonSave = rootView.findViewById(R.id.button_save);
         buttonSave.setOnClickListener(v -> {
+            Profile p = list.stream().filter(e -> e.getProfileName().equals(line1.getText().toString())).findFirst().get();
+            if (p != null) {
+                list.remove(p);
+            }
             list.add(new Profile(line1.getText().toString(), line2.getText().toString()));
-            saveDate();
+            saveData();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            if (Build.VERSION.SDK_INT >= 26) {
+                ft.setReorderingAllowed(false);
+            }
+            ft.detach(this).attach(this).commit();
+        });
 
+        buttonDel = rootView.findViewById(R.id.button_remove);
+        buttonDel.setOnClickListener(v -> {
+            removeData();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            if (Build.VERSION.SDK_INT >= 26) {
+                ft.setReorderingAllowed(false);
+            }
+            ft.detach(this).attach(this).commit();
+        });
+
+        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                Object item = adapterView.getItemAtPosition(position);
+                if (item != null) {
+                    Profile p = list.stream().filter(e -> e.getProfileName().equals(item.toString())).findFirst().get();
+                    line1.setText(p.getProfileName());
+                    line2.setText(p.getTwitterName());
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // TODO Auto-generated method stub
+            }
         });
 
         saveSpinner(s);
         return rootView;
     }
 
-    private void saveDate() {
+    private void saveData() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
@@ -65,20 +101,31 @@ public class ProfileFragment extends Fragment {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("task list", null);
-        Type type = new TypeToken<ArrayList<Profile>>() {}.getType();
+        Type type = new TypeToken<ArrayList<Profile>>() {
+        }.getType();
         list = gson.fromJson(json, type);
         if (list == null) {
             list = new ArrayList<>();
         }
     }
 
-    private void saveSpinner(Spinner s){
-        arrList = new String[list.size()];
-        for (int i = 0; i < list.size(); i++){
-            arrList[i] = list.get(i).getProfileName();
+    private void removeData(){
+        SharedPreferences pref = getContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove("task list");
+        editor.apply();
+    }
+
+    private void saveSpinner(Spinner s) {
+        arrList = new ArrayList<String>();
+        for (int i = 0; i < list.size(); i++) {
+            arrList.add(list.get(i).getProfileName());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, arrList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        s.setAdapter(adapter);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, arrList);
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter.notifyDataSetChanged();
+        // attaching data adapter to spinner
+        s.setAdapter(dataAdapter);
     }
 }
