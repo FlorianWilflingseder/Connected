@@ -16,6 +16,8 @@ import twitter4j.conf.ConfigurationBuilder;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ProfileFragment pf;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FeedFragment()).commit();
+
+
+
         new TwitterManager();
     }
 
@@ -38,11 +43,12 @@ public class MainActivity extends AppCompatActivity {
 
                     switch (item.getItemId()) {
                         case R.id.nav_feed:
-                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FeedFragment()).commit();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pf.getFg()).commit();
                             break;
 
                         case R.id.nav_profile:
-                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+                            pf = new ProfileFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pf).commit();
                             break;
 
                         case R.id.nav_support:

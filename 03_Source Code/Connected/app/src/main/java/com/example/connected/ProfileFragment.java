@@ -20,13 +20,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.connected.Feed.FeedMessage;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class ProfileFragment extends Fragment {
+
+    FeedFragment fg = new FeedFragment();
+
+    public FeedFragment getFg() {
+        return fg;
+    }
+
+    Profile selecetedProfile = null;
+
 
     private ArrayList<Profile> list;
     Spinner s;
@@ -37,6 +48,7 @@ public class ProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         s = rootView.findViewById(R.id.spinner);
         line1 = rootView.findViewById(R.id.profileName);
@@ -45,9 +57,11 @@ public class ProfileFragment extends Fragment {
 
         buttonSave = rootView.findViewById(R.id.button_save);
         buttonSave.setOnClickListener(v -> {
-            Profile p = list.stream().filter(e -> e.getProfileName().equals(line1.getText().toString())).findFirst().get();
-            if (p != null) {
-                list.remove(p);
+            if (!list.isEmpty()) {
+                Optional o = list.stream().filter(e -> e.getProfileName().equals(line1.getText().toString())).findFirst();
+                if (o.isPresent()) {
+                    list.remove(o.get());
+                }
             }
             list.add(new Profile(line1.getText().toString(), line2.getText().toString()));
             saveData();
@@ -74,6 +88,9 @@ public class ProfileFragment extends Fragment {
                 Object item = adapterView.getItemAtPosition(position);
                 if (item != null) {
                     Profile p = list.stream().filter(e -> e.getProfileName().equals(item.toString())).findFirst().get();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("profile", new Gson().toJson(p));
+                    fg.setArguments(bundle);
                     line1.setText(p.getProfileName());
                     line2.setText(p.getTwitterName());
                 }

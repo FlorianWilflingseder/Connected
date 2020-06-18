@@ -20,8 +20,7 @@ public class RetrieveTweetsTask extends AsyncTask<String,Void, List<String>> {
         try{
             ResponseList<twitter4j.Status> statuses = TwitterManager.getinstance().getUserTimeline(strings[0]);
             return statuses.stream().map(
-                    item -> item.getText()).collect(
-                    Collectors.toList());
+                    item -> item.getText()).collect(Collectors.toList());
         }catch (Exception e){
             this.exception = e;
             return null;

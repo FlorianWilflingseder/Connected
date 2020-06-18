@@ -20,5 +20,4 @@ public class TwitterManager {
     {
         return tf.getInstance();
     }
-
 }
